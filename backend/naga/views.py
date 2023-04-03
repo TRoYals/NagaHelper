@@ -12,14 +12,29 @@ from django.http import HttpResponse
 from django.views import View
 class NagaView(View):
     def get(self, request):
-
         option = webdriver.ChromeOptions()
         option.add_argument('--user-data-dir=/Users/fuqixuan/Library/Application Support/Google/Chrome/Default')
         option.add_experimental_option("detach", True)
-        #加载前面获取的 个人资料路径
+        driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=option)
+
+
+
+        driver.get('https://naga.dmv.nico/naga_report/order_report_list/')
+        link = driver.find_element(By.CSS_SELECTOR, "#myTabContent > div:nth-child(1) > div.text-center > div > table > tbody > tr > td.px-0 > div > a")
+
+        returnValue = str(link.get_attribute('href'))
+        driver.close()
+        return HttpResponse(returnValue)
+
+    def post(self,request):
+        option = webdriver.ChromeOptions()
+        option.add_argument('--user-data-dir=/Users/fuqixuan/Library/Application Support/Google/Chrome/Default')
+        option.add_experimental_option("detach", True)
 
         driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=option)
 
+
+               
         # driver = webdriver.Chrome(chrome_options=option)#/Users/fuqixuan/Downloads/chromedriver_mac_arm64
         driver.get('https://naga.dmv.nico/naga_report/order_form/')
         input_field = driver.find_element(By.NAME, "haihu_url")
@@ -30,15 +45,8 @@ class NagaView(View):
         driver.implicitly_wait(10)
 
         restNp =driver.find_element(By.CLASS_NAME, "h4")
-        print(restNp.text)
         button.click()
+        text = restNp.text
         driver.implicitly_wait(30)
-
-        driver.get('https://naga.dmv.nico/naga_report/order_report_list/')
-        link = driver.find_element(By.CSS_SELECTOR, "#myTabContent > div:nth-child(1) > div.text-center > div > table > tbody > tr > td.px-0 > div > a")
-
-        returnValue = link.get_attribute('href')
-        return HttpResponse(returnValue)
-
-    def post(self,request):
-        return HttpResponse("Hello, world. You're at post index.")
+        driver.close()
+        return HttpResponse(text)
