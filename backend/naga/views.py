@@ -16,12 +16,8 @@ class NagaView(View):
         option.add_argument('--user-data-dir=/Users/fuqixuan/Library/Application Support/Google/Chrome/Default')
         option.add_experimental_option("detach", True)
         driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=option)
-
-
-
         driver.get('https://naga.dmv.nico/naga_report/order_report_list/')
         link = driver.find_element(By.CSS_SELECTOR, "#myTabContent > div:nth-child(1) > div.text-center > div > table > tbody > tr > td.px-0 > div > a")
-
         returnValue = str(link.get_attribute('href'))
         driver.close()
         return HttpResponse(returnValue)
@@ -30,11 +26,8 @@ class NagaView(View):
         option = webdriver.ChromeOptions()
         option.add_argument('--user-data-dir=/Users/fuqixuan/Library/Application Support/Google/Chrome/Default')
         option.add_experimental_option("detach", True)
-
         driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=option)
 
-
-               
         # driver = webdriver.Chrome(chrome_options=option)#/Users/fuqixuan/Downloads/chromedriver_mac_arm64
         driver.get('https://naga.dmv.nico/naga_report/order_form/')
         input_field = driver.find_element(By.NAME, "haihu_url")
