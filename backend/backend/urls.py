@@ -20,7 +20,12 @@ from naga import views
 from rest_framework import routers
 
 
+router = routers.DefaultRouter()
+router.register(r'nagadata', views.NagaDataView, 'nagadata')
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("naga/", views.NagaView.as_view()),
+    path('api/', include(router.urls)),
+    path('naga/', views.NagaView.as_view()),
+
 ]

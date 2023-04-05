@@ -5,6 +5,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from rest_framework import viewsets
+from .models import NagaData,NagaName
+from .serializers import NagaDataSerializer,NagaNameSerializer
 
 
 # Create your views here.
@@ -43,3 +46,8 @@ class NagaView(View):
         driver.implicitly_wait(30)
         driver.close()
         return HttpResponse(text)
+
+
+class NagaDataView(viewsets.ModelViewSet):
+    serializer_class = NagaDataSerializer
+    queryset = NagaData.objects.all()
