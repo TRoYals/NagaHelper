@@ -10,9 +10,19 @@ from .models import NagaData,NagaName
 from .serializers import NagaDataSerializer,NagaNameSerializer
 
 
+
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
+
+
+def get_all_data(request):
+    if request.method == "GET":
+        mydata = NagaData.objects.get(id=1)
+        data = mydata.to_dict()
+        return JsonResponse(data)
+
 class NagaView(View):
     def get(self, request):
         option = webdriver.ChromeOptions()

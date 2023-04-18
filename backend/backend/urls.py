@@ -27,5 +27,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/', include(router.urls)),
     path('naga/', views.NagaView.as_view()),
+    path('get_all_data/', views.get_all_data, name='get_all_data'),
 
 ]

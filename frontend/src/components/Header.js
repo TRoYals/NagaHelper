@@ -83,14 +83,14 @@ function Header() {
             <ul className="flex flex-grow justify-end flex-wrap items-center">
               <li>
                 <Link
-                  to="/signin"
+                  to="/"
                   className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
                   首页
                 </Link>
               </li>
               <li>
-                <Link to="/signup" className="btn-sm hover:bg-gray-100 ml-3">
+                <Link to="/nagaData" className="btn-sm hover:bg-gray-100 ml-3">
                   <span>所有请求</span>
                 </Link>
               </li>

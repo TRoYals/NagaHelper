@@ -6,7 +6,12 @@ class NagaData(models.Model):
     description = models.TextField(unique=True)
     date = models.DateField()
     creater = models.CharField(max_length=20,default="null")
-
+    def to_dict(self):
+        return {
+        'id': self.id,
+        'date':self.date,
+        'creater':self.creater,
+    }
     def _str_(self):
         return self.title
 
